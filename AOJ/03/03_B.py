@@ -1,5 +1,5 @@
 data_l = []
-while True:
+for _ in range(10000):
     in_data = int(input())
     if in_data == 0:
         break
