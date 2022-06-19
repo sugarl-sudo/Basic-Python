@@ -9,11 +9,10 @@ while True:
     n.append(i)
     x.append(j)
 
-ans = ["0"]*len(n)
 for i in range(len(n)):
+    ans = 0
     for comb in itertools.combinations(range(1, n[i] + 1), 3):
         if comb[0] + comb[1] + comb[2] == x[i]:
-            ans[i] = 1 + int(ans[i])
-            ans[i] = str(ans[i])
+            ans = 1 + ans
 
-print("\n".join(ans))
+    print(ans)
