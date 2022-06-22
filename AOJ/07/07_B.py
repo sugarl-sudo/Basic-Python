@@ -13,6 +13,6 @@ for i in range(len(n)):
     ans = 0
     for comb in itertools.combinations(range(1, n[i] + 1), 3):
         if comb[0] + comb[1] + comb[2] == x[i]:
-            ans = 1 + ans
+            ans += 1
 
     print(ans)
