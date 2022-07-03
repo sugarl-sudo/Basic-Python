@@ -1,55 +1,27 @@
 class Dice:
-    def __init__(self, surface):
-        self.top = surface[0]
-        self.bot = surface[5]
-        self.N = surface[4]
-        self.E = surface[2]
-        self.S = surface[1]
-        self.W = surface[3]
+    def __init__(self, surfaces):
+        self.sur = [0] * 6
+        for i in range(6):
+            self.sur[i] = surfaces[i]
 
-    def move_n(self):
-        self.top, self.bot, self.N, self.S = self.S, self.N, self.top, self.bot
-
-    def move_e(self):
-        self.top, self.bot, self.E, self.W = self.W, self.E, self.top, self.bot
-
-    def move_s(self):
-        self.top, self.bot, self.N, self.S = self.N, self.S, self.bot, self.top
-
-    def move_w(self):
-        self.top, self.bot, self.E, self.W = self.E, self.W, self.bot, self.top
+    def move(self, command):
+        if command == "N":
+            self.sur[0], self.sur[5], self.sur[4], self.sur[1] = self.sur[1], self.sur[4], self.sur[0], self.sur[5]
+        elif command == "E":
+            self.sur[0], self.sur[5], self.sur[2], self.sur[3] = self.sur[3], self.sur[2], self.sur[0], self.sur[5]
+        elif command == "S":
+            self.sur[0], self.sur[5], self.sur[4], self.sur[1] = self.sur[4], self.sur[1], self.sur[5], self.sur[0]
+        else:
+            self.sur[0], self.sur[5], self.sur[2], self.sur[3] = self.sur[2], self.sur[3], self.sur[5], self.sur[0]
 
     def same_judge(self, dice):
         move_command = 'NNNNWNNNWNNNENNNENNNWNNN'
         flag = False
         for com in move_command:
-            if com == "N":
-                self.move_n()
-            elif com == "E":
-                self.move_e()
-            elif com == "S":
-                self.move_s()
-            else:
-                self.move_w()
-
+            self.move(com)
             tmp_flag = True
             for i in range(6):
-                if self.top != dice.top:
-                    tmp_flag = False
-                    break
-                if self.bot != dice.bot:
-                    tmp_flag = False
-                    break
-                if self.N != dice.N:
-                    tmp_flag = False
-                    break
-                if self.S != dice.S:
-                    tmp_flag = False
-                    break
-                if self.E != dice.E:
-                    tmp_flag = False
-                    break
-                if self.W != dice.W:
+                if self.sur[i] != dice.sur[i]:
                     tmp_flag = False
                     break
 
